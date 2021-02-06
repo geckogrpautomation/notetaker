@@ -11,9 +11,10 @@ const PORT = 8080;
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'develop/public')));
 
 // Routes
-//Home Page
+//Home P
 // Basic route that sends the user first to home page
 app.get("/", (req , res) => {
 
