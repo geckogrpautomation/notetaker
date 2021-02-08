@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, 'develop/public')));
 // Basic route that sends the user first to home page
 app.get("/", (req , res) => {
 
-    returnFile(res , "develop/public/index.html");
+    returnFile(res , path.join(__dirname, "develop/public/index.html"));
     
 });
 
@@ -26,7 +26,7 @@ app.get("/", (req , res) => {
 //Basic route that send the user to notes.html
 app.get("/notes", (req , res) => {
 
-    returnFile(res , "develop/public/notes.html");
+    returnFile(res , path.join(__dirname, "develop/public/notes.html"));
     
 });
 
@@ -35,14 +35,14 @@ app.get("/notes", (req , res) => {
 app.get("/api/notes", (req , res) => {
     
     //returnJSON(req,res,"develop/db/db.json");    
-    returnFile(res , "develop/db/db.json");
+    returnFile(res , path.join(__dirname, "develop/db/db.json"));
     
 });
 
 //Basic route for the api that adds the users req data to the db.JSON file and then returns the altered file to the user for front end rendering
 app.post("/api/notes", (req , res) => { 
 
-    postAddNote(req , res , "develop/db/db.json");      
+    postAddNote(req , res , path.join(__dirname, "develop/db/db.json"));      
     
 });
 
@@ -51,7 +51,7 @@ app.delete("/api/notes/:id", (req , res) => {
 
     let id = req.params.id;
     console.log("app.delete " + id);
-    deleteNote(res,"develop/db/db.json",id);   
+    deleteNote(res,path.join(__dirname, "develop/db/db.json",id));   
     
    
 });   
