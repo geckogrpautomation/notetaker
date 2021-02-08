@@ -1,4 +1,4 @@
-#Organisation Chart CLI Generator
+#Note taker
   <br/>
   ##readme.md
   <br/>
@@ -13,9 +13,9 @@
     <a href="github.com">
       <img src="./pic/orgchart.jpg" alt="Logo" width="240" height="240">
     </a>
-    <h1 align="center">Project Title - Organisation Chart CLI Generator</h1> 
+    <h1 align="center">Project Title - Note taker</h1> 
     <h2 align="center">Project Description</h2>
-    <p align="center">A command line interface tool that allows the user to create organisational charts..    
+    <p align="center">A note taking tool usilising express and storing data persistenly on server via JSON files.    
       <br/>
       <a href="github.com"<strong>Link to the repo.</strong></a>
       <br/>
@@ -51,7 +51,7 @@
   
   ## About The Project.
   
-  A commanmd line interface tool that allows the user to create a professional readme in a short time.
+  AA note taking tool usilising express and storing data persistenly on server via JSON files.   
   
   
   
@@ -63,8 +63,6 @@
  * Markup 
  * Shields.IO 
  * Inquirer 
- * Google Charts (Org Chart)
- * Jest
  * Node.js
  
  
@@ -77,8 +75,8 @@
   ### Prerequisite
   
   * Inquirer 
-  * Jest
   * node.JS
+  * express
  
     
   
@@ -97,16 +95,7 @@
   
   The repo should have a package.JSON and a package-lock.JSON file which lists all the dependancies. Hence only npm install is required. 
      
-  
-  ### Usage video
-  
-  See below link for a link on how to use our code.
-  
-  https://drive.google.com/file/d/1b8J4tvkWwAQdJNpYmnnubD2qZiy5lbIZ/view
-
-
-  https://drive.google.com/file/d/1tzhLk47ClU2hI_x_5ct_e_kd19hYgvq_/view
-  
+    
   
   ## Contributing
   
@@ -137,7 +126,7 @@
   Project Link: -  github.com
 
  
-  [Issues]: https://img.shields.io/github/issues/geckogrpautomation/readMeCLI
-  [Forks]: https://img.shields.io/github/forks/geckogrpautomation/readMeCLI
-  [Stars]: https://img.shields.io/github/stars/geckogrpautomation/readMeCLI
-  [License]: https://img.shields.io/github/license/geckogrpautomation/readMeCLI
+  [Issues]: https://img.shields.io/github/issues/geckogrpautomation/notetaker
+  [Forks]: https://img.shields.io/github/forks/geckogrpautomation/notetaker
+  [Stars]: https://img.shields.io/github/stars/geckogrpautomation/notetaker
+  [License]: https://img.shields.io/github/license/geckogrpautomation/notetaker
