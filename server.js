@@ -50,8 +50,8 @@ app.post("/api/notes", (req , res) => {
 app.delete("/api/notes/:id", (req , res) => { 
 
     let id = req.params.id;
-    console.log("app.delete " + id);
-    deleteNote(res,path.join("db/db.json",id));   
+    
+    deleteNote(res,"db/db.json",id);   
     
    
 });   
