@@ -34,15 +34,15 @@ app.get("/notes", (req , res) => {
 //Basic route that sends the notes.JSON file contents to the user for renderign front end
 app.get("/api/notes", (req , res) => {
     
-    //returnJSON(req,res,"develop/db/db.json");    
-    returnFile(res , path.join(__dirname, "develop/db/db.json"));
+    //returnJSON(req,res,"db/db.json");    
+    returnFile(res , path.join(__dirname, "db/db.json"));
     
 });
 
 //Basic route for the api that adds the users req data to the db.JSON file and then returns the altered file to the user for front end rendering
 app.post("/api/notes", (req , res) => { 
 
-    postAddNote(req , res , path.join(__dirname, "develop/db/db.json"));      
+    postAddNote(req , res , path.join(__dirname, "db/db.json"));      
     
 });
 
@@ -51,7 +51,7 @@ app.delete("/api/notes/:id", (req , res) => {
 
     let id = req.params.id;
     console.log("app.delete " + id);
-    deleteNote(res,path.join(__dirname, "develop/db/db.json",id));   
+    deleteNote(res,path.join(__dirname, "db/db.json",id));   
     
    
 });   
