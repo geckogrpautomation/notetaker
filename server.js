@@ -11,14 +11,14 @@ const PORT = process.env.PORT || 8080
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'develop/public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 //Home P
 // Basic route that sends the user first to home page
 app.get("/", (req , res) => {
 
-    returnFile(res , path.join(__dirname, "develop/public/index.html"));
+    returnFile(res , path.join(__dirname, "public/index.html"));
     
 });
 
@@ -26,7 +26,7 @@ app.get("/", (req , res) => {
 //Basic route that send the user to notes.html
 app.get("/notes", (req , res) => {
 
-    returnFile(res , path.join(__dirname, "develop/public/notes.html"));
+    returnFile(res , path.join(__dirname, "public/notes.html"));
     
 });
 
