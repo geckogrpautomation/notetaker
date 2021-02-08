@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, 'develop/public')));
 app.get("/", (req , res) => {
 
     returnFile(res , "develop/public/index.html");
-
+    
 });
 
 
@@ -27,7 +27,7 @@ app.get("/", (req , res) => {
 app.get("/notes", (req , res) => {
 
     returnFile(res , "develop/public/notes.html");
-
+    
 });
 
 
@@ -36,28 +36,38 @@ app.get("/api/notes", (req , res) => {
     
     //returnJSON(req,res,"develop/db/db.json");    
     returnFile(res , "develop/db/db.json");
-
+    
 });
 
 //Basic route for the api that adds the users req data to the db.JSON file and then returns the altered file to the user for front end rendering
 app.post("/api/notes", (req , res) => { 
 
-    postAddNote(req , res , "develop/db/db.json");       
+    postAddNote(req , res , "develop/db/db.json");      
+    
+});
 
-    });
+ //Basic route for the api that adds the users req data to the db.JSON file and then returns the altered file to the user for front end rendering
+app.delete("/api/notes/:id", (req , res) => { 
+
+    let id = req.params.id;
+    console.log("app.delete " + id);
+    deleteNote(res,"develop/db/db.json",id);   
+    
+   
+});   
     
 //Send user back to home page index.html if user route detected
 app.get('*', (req , res) => {
 
     res.redirect('/');
-
+    
 });
 
 //Return HTML file to client
 function returnFile(res , pathExt){   
 
     res.sendFile ( path.join (__dirname , pathExt ) );
-
+    
 }
 
 
@@ -76,16 +86,20 @@ function postAddNote ( req , res , pathExt ) {
             res.status(500).send("Contact your site administrator. Something went wrong")
         }
         else{
+                            
             
-            hash = returnHash();        
+            db = JSON.parse(data);            
 
-            db = JSON.parse(data);
+            let msg = JSON.stringify( req.body.title) + JSON.stringify(req.body.text);
 
-            db.push({title: req.body.title , text : req.body.text , id: hash});            
+            const SD5 = returnSD5(msg);
 
-            res.json(JSON.stringify(db));   
+            db.push({title: req.body.title , text : req.body.text , id: SD5});         
 
             updateDbFile(db , filePath);
+
+            res.sendFile ( path.join (__dirname , pathExt ) );            
+            
         }
     });
 }
@@ -97,7 +111,7 @@ function updateDbFile(db , filePath){
 
         if (err) {
             
-            console.log(err); 
+            res.status(500).send("Server Error contact site administrator"); 
 
         }
 
@@ -115,28 +129,64 @@ function updateDbFile(db , filePath){
 
                 if (err) {
 
-                    console.log(err); 
+                    res.status(500).send("Server Error contact site administrator"); 
 
                 }
-
-                else { 
-
-                  console.log(fs.readFileSync(filePath, "utf8")); 
-
-                } 
+                
             });        
         } 
     });   
 }
 
 
-//Return unique SHA 1 hash based upon iso date and secret for unique ID member inside db.JSON
-function returnHash(){
+function deleteNote(res, pathExt,id){
 
-    let hash = CryptoJS.HmacSHA1(dayjs().format("YYYY-MM-DD HH:mm:ss:sss"),"lizard");
+    let filePath = path.join(__dirname, pathExt);
 
-    return hash.toString(CryptoJS.enc.Base64);
+       
+    fs.readFile (filePath , "utf8" , (err , data) => {
 
+        if (err){
+
+            console.log(err);
+
+            res.status(500).send("Contact your site administrator. Something went wrong")
+        }
+        else{
+            
+           // console.log(data);
+            db = JSON.parse(data);
+                                    
+            //Return index of the user delete request and delete that object from the array.
+            db.forEach( (e,i) => {               
+                if (e.id === id){
+                    
+                    db.splice(i,1);                    
+                }               
+            });
+           
+           //Update dbFile with new array after the delete
+           updateDbFile(db , filePath);
+           
+           res.sendFile ( path.join (__dirname , pathExt ) ); 
+                       
+            
+        }
+
+    });
+
+
+
+}
+
+
+//Return unique SD5 to create unique id and to be able to read back as a checksum for data intgrity.
+function returnSD5(data){
+
+    const x = CryptoJS.MD5(data);    
+    
+    return x.toString(CryptoJS.enc.Hex);
+    
 }
 
 // Starts the server to begin listening
