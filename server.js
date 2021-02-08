@@ -42,7 +42,7 @@ app.get("/api/notes", (req , res) => {
 //Basic route for the api that adds the users req data to the db.JSON file and then returns the altered file to the user for front end rendering
 app.post("/api/notes", (req , res) => { 
 
-    postAddNote(req , res , "db/db.json"));      
+    postAddNote(req , res , "db/db.json");      
     
 });
 
